@@ -8,13 +8,21 @@
 {% endblock extra_css %}
 
 {% block content %}
-    <div class="teste">
+    {% comment %} <div class="teste">
         <a href="{% url 'post-create' %}">
             <button> 
                 Adicionar dino
             </button>
         </a>
+    </div> {% endcomment %}
+
+    <div class="submenu">
+        <h2>Ações</h2>
+        <a href="{% url 'post-create' %}" class="btn btn-primary">Criar Dinossauro</a>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Ver Lista de Dinossauros</a>
+        <a href="#" class="btn btn-info">Outra Ação</a>
     </div>
+
     <section class="dinos-list">
         {% for post in posts %}
         <div class="dino">

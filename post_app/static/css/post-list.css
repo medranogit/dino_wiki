@@ -14,6 +14,12 @@
   font-size: var(--font-size-base);
   position: relative;
   text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.dino:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .dino .container {
@@ -77,4 +83,25 @@
   border-radius: var(--border-radius);
   width: 100%;
   height: auto;
+}
+
+@media (max-width: 768px) {
+    .dinos-list {
+        grid-template-columns: 1fr; /* Uma coluna em telas pequenas */
+    }
+}
+
+.submenu {
+    margin: 2rem 0;
+    padding: 1rem;
+    background-color: var(--primary-bg-color);
+    border-radius: 5px;
+}
+
+.submenu h2 {
+    margin-bottom: 1rem;
+}
+
+.submenu .btn {
+    margin-right: 1rem; /* Espaçamento entre os botões */
 }

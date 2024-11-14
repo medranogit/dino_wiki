@@ -8,24 +8,26 @@
 {% endblock %}
 
 {% block content %}
-    <div class="dino-info">
-        <div class="column column1">
-            <h1>{{ post.dinoNome }}</h1>
-            <div class="image">
-                <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+    <div class="dino-detail-layout">
+        <div class="dino-info">
+            <div class="column column1">
+                <h1>{{ post.dinoNome }}</h1>
+                <div class="image">
+                    <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+                </div>
+            </div>
+            <div class="column column2">
+                <div class="info">
+                    <p><strong>Tipo:</strong> {{ post.dinoTipo }}</p>
+                    <p><strong>Descrição:</strong> {{ post.dinoDescricao }}</p>
+                    <p><strong>Dieta:</strong> {{ post.dinoDieta }}</p>
+                    <p><strong>Tamanho:</strong> {{ post.dinoTamanhoMin }} - {{ post.dinoTamanhoMax }} m</p>
+                    <p><strong>Peso:</strong> {{ post.dinoPesoMin }} - {{ post.dinoPesoMax }} kg</p>
+                    <p><strong>Biomas:</strong> {% for bioma in post.biomas.all %}{{ bioma.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+                    <p><strong>Criado em:</strong> {{ post.dinoCreateDate }}</p>
+                </div>
             </div>
         </div>
-        <div class="column column2">
-            <div class="info">
-                <p><strong>Tipo:</strong> {{ post.dinoTipo }}</p>
-                <p><strong>Descrição:</strong> {{ post.dinoDescricao }}</p>
-                <p><strong>Dieta:</strong> {{ post.dinoDieta }}</p>
-                <p><strong>Tamanho:</strong> {{ post.dinoTamanhoMin }} - {{ post.dinoTamanhoMax }} m</p>
-                <p><strong>Peso:</strong> {{ post.dinoPesoMin }} - {{ post.dinoPesoMax }} kg</p>
-                <p><strong>Biomas:</strong> {% for bioma in post.biomas.all %}{{ bioma.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                <p><strong>Criado em:</strong> {{ post.dinoCreateDate }}</p>
-            </div>
-        </div>
+        <a href="{% url 'index' %}" class="back-button">Voltar à lista</a>
     </div>
-    <a href="{% url 'index' %}" class="back-button">Voltar à lista</a>
 {% endblock content %}

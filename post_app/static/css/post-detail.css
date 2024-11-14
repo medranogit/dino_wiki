@@ -34,6 +34,8 @@
   height: auto;
   border-radius: var(--border-radius);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra na imagem */
+  border: 5px solid var(--secondary-bg-color);
+  border-radius: 10px;
 }
 
 /* Informações do Dino */
@@ -46,6 +48,9 @@
   font-size: var(--font-size-base);
   margin: 0.5rem 0; /* Espaçamento entre parágrafos */
   line-height: 1.5; /* Aumenta o espaçamento entre linhas */
+  background-color: var(--terciary-bg-color);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* Botão de Voltar */
@@ -66,9 +71,12 @@
   background-color: var(--secondary-bg-color);
 }
 
-/* Garantir que o main-layout preencha a altura total */
-.main-layout {
+/* Garantir que o layout de detalhes do dino preencha a altura total */
+.dino-detail-layout {
   display: flex; /* Usando flexbox */
   flex-direction: column; /* Organiza os itens em coluna */
-  height: 100vh; /* Altura total da viewport */
+}
+
+body {
+  background-color: #0f2231;
 }

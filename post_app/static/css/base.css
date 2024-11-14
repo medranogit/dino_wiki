@@ -2,7 +2,7 @@
 :root {
     --primary-bg-color: #153147;
     --secondary-bg-color: #2e5270;
-    --terciary-bg-color:rgb(78, 101, 121)0;
+    --terciary-bg-color: rgb(78, 101, 121);
     --highlight-bg-color: rgba(11,29,44,.459);
     --text-color: #e5fbff;
     --font-size-base: 16px;
@@ -14,7 +14,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: Nunito,sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
   }
@@ -55,8 +55,13 @@
     background-color: var(--secondary-bg-color);
   }
 
+  body{
+    background-color: #0f2231;
+  }
+
   .main-layout{
-    color: #fff;
+    color: white;
+    background-color: #0f2231;
     margin: auto auto 5rem;
     max-width: 1500px;
     min-height: 90vh;
@@ -68,4 +73,41 @@
     height: 200px;
     width: auto;
     background-color: var(--primary-bg-color);
+  }
+
+  button {
+    transition: background-color 0.3s, transform 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
+
+  .messages {
+    list-style: none;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 5px;
+  }
+
+  .messages .success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+
+  .messages .error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+
+  .navbar {
+    background-color: var(--primary-bg-color);
+  }
+
+  .navbar .nav-link {
+    color: #fff;
+  }
+
+  .navbar .nav-link:hover {
+    color: var(--secondary-bg-color);
   }
