@@ -1,5 +1,5 @@
 from django import forms  # Importa o módulo de formulários do Django.
-from .models import Post  # Importa o modelo Posts do arquivo models.py.
+from .models import Post  # Altere para Post se você estiver usando esse modelo
 
 class PostsForm(forms.ModelForm):  # Cria um formulário baseado no modelo Posts.
 
@@ -8,7 +8,7 @@ class PostsForm(forms.ModelForm):  # Cria um formulário baseado no modelo Posts
         ('ton', 'Toneladas'),
     ]
 
-    unidade_peso = forms.ChoiceField(choices=UNIDADES_PESO, label='Unidade de Peso')  # Campo para selecionar kg ou toneladas
+    unidade_peso = forms.ChoiceField(choices=UNIDADES_PESO, label='Unidade de Peso', required=True)  # Campo para selecionar kg ou toneladas
 
     class Meta:
         model = Post  # Especifica que este formulário será baseado no modelo Posts.
@@ -17,6 +17,7 @@ class PostsForm(forms.ModelForm):  # Cria um formulário baseado no modelo Posts
             'dinoTipo',          # Tipo do dinossauro
             'dinoDescricao',     # Descrição do dinossauro
             'dinoEpoca',         # Época geológica do dinossauro
+            'dinoDieta',         # Adiciona o campo dinoDieta
             'dinoTamanhoMin',    # Tamanho mínimo do dinossauro
             'dinoTamanhoMax',    # Tamanho máximo do dinossauro
             'unidade_peso',      # Adiciona o campo de unidade de peso acima dos outros campos de peso
@@ -47,3 +48,20 @@ class PostsForm(forms.ModelForm):  # Cria um formulário baseado no modelo Posts
             cleaned_data['dinoPesoMax'] = peso_max * 1000 if peso_max else None
         
         return cleaned_data
+
+class DinoForm(forms.ModelForm):
+    class Meta:
+        model = Post  # Ou o modelo que você deseja usar
+        fields = [
+            'dinoNome',
+            'dinoTipo',
+            'dinoDescricao',
+            'dinoEpoca',
+            'dinoDieta',
+            'dinoTamanhoMin',
+            'dinoTamanhoMax',
+            'dinoPesoMin',
+            'dinoPesoMax',
+            'biomas',
+            'dinoImage'
+        ]

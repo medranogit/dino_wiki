@@ -1,13 +1,128 @@
 {% extends 'base.html' %}
-{% block title %}Criar/Atualizar Postagem{% endblock %}
+
+{% block title %}Criar Novo Dinossauro{% endblock %}
 
 {% block content %}
-    <form method="post"
-        action="{% if request.method == 'POST' %} {% url 'post-create' %} {% endif %}"
-        enctype="multipart/form-data">
-        
+<div class="post_form_create">
+    <h1>Criar Novo Dinossauro</h1>
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Criar</button>
+        
+        <div class="form-group">
+            <label for="dinoNome">Nome do Dinossauro</label>
+            <input type="text" class="form-control" id="dinoNome" name="dinoNome" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="dinoTipo">Tipo</label>
+            <select class="form-control" id="dinoTipo" name="dinoTipo" required>
+                <option value="">Selecione um tipo</option>
+                {% for tipo in tipos %}
+                    <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="dinoDescricao">Descrição</label>
+            <textarea class="form-control" id="dinoDescricao" name="dinoDescricao" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="dinoEpoca">Época</label>
+            <select class="form-control" id="dinoEpoca" name="dinoEpoca" required>
+                <option value="">Selecione uma época</option>
+                {% for epoca in epocas %}
+                    <option value="{{ epoca.id }}">{{ epoca.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="dinoDieta">Dieta</label>
+            <select class="form-control" id="dinoDieta" name="dinoDieta" required>
+                <option value="">Selecione uma dieta</option>
+                {% for dieta in dietas %}
+                    <option value="{{ dieta.id }}">{{ dieta.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="dinoTamanhoMin">Tamanho Mínimo (m)</label>
+                <input type="number" class="form-control" id="dinoTamanhoMin" name="dinoTamanhoMin" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="dinoTamanhoMax">Tamanho Máximo (m)</label>
+                <input type="number" class="form-control" id="dinoTamanhoMax" name="dinoTamanhoMax" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="unidadePeso">Unidade de Peso</label>
+            <select class="form-control" id="unidadePeso" name="unidade_peso" required>
+                <option value="">Selecione uma unidade</option>
+                <option value="kg">Kilogramas</option>
+                <option value="ton">Toneladas</option>
+            </select>
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="dinoPesoMin">Peso Mínimo</label>
+                <input type="number" class="form-control" id="dinoPesoMin" name="dinoPesoMin" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="dinoPesoMax">Peso Máximo</label>
+                <input type="number" class="form-control" id="dinoPesoMax" name="dinoPesoMax" required>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="biomas">Biomas</label>
+            <select multiple class="form-control" id="biomas" name="biomas" required>
+                {% for bioma in biomas %}
+                    <option value="{{ bioma.id }}">{{ bioma.nome }}</option>
+                {% endfor %}
+            </select>
+            <small>Pressione “Control”, ou “Command” no Mac, para selecionar mais de um.</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="dinoImage">Imagem do Dinossauro</label>
+            <input type="file" class="form-control-file" id="dinoImage" name="dinoImage" accept="image/*">
+        </div>
+        
+        
+        
+        <button type="submit" class="btn btn-primary">Criar Dinossauro</button>
+        <a href="{% url 'index' %}" class="btn btn-secondary">Voltar</a>
     </form>
-{% endblock content %}
+</div>
+
+<script>
+    // Função para preencher as listas
+    function preencherSelect(selectId, options) {
+        const select = document.getElementById(selectId);
+        options.forEach(option => {
+            const newOption = document.createElement("option");
+            newOption.value = option.id; // Supondo que você tenha um campo 'id'
+            newOption.textContent = option.nome; // Supondo que você tenha um campo 'nome'
+            select.appendChild(newOption);
+        });
+    }
+
+    // Carregar opções do servidor
+    window.onload = function() {
+        fetch('/api/get-options/')
+            .then(response => response.json())
+            .then(data => {
+                preencherSelect("dinoTipo", data.tipos);
+                preencherSelect("dinoEpoca", data.epocas);
+                preencherSelect("dinoDieta", data.dietas);
+            })
+            .catch(error => console.error('Erro ao carregar opções:', error));
+    };
+</script>
+{% endblock %}
