@@ -82,7 +82,7 @@
   background-color: var(--highlight-bg-color);
   border-radius: var(--border-radius);
   width: 100%;
-  height: auto;
+  height: 13rem;
 }
 
 @media (max-width: 768px) {
@@ -105,3 +105,26 @@
 .submenu .btn {
     margin-right: 1rem; /* Espaçamento entre os botões */
 } 
+
+@media (max-width: 768px) {
+  .submenu {
+      flex-direction: column; /* Alinha os botões em coluna em telas pequenas */
+      align-items: center; /* Centraliza os botões na coluna */
+  }
+
+  .submenu .btn {
+      width: 100%; /* Faz com que os botões ocupem toda a largura disponível */
+      margin: 0.5rem 0; /* Espaçamento vertical entre os botões */
+  }
+}
+
+/* Estilos para desktop */
+@media (min-width: 769px) {
+  .submenu {
+      flex-direction: row; /* Mantém os botões em linha em telas grandes */
+  }
+
+  .submenu .btn {
+      width: auto; /* Permite que os botões tenham largura automática */
+  }
+}
