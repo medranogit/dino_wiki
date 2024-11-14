@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Dinos{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h1>Dinossauros</h1>
+
+        <a href="{% url 'post-create' %}" class="btn btn-primary mb-3">Criar um Post</a>  <!-- Adiciona um botão estilizado -->
+    </div>
+   
+    
+
+
+    <div class="container-fluid my-4">
+        <div class="row g-4 mx-4">
+            {% for post in posts %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-2 my-2">  <!-- Ajusta o número máximo de colunas em diferentes tamanhos de tela -->
+                <div class="card h-100 text-bg-light" style="max-height: 500px; overflow: hidden;">  <!-- Limita a altura do card -->
+                    <div class="img-container" style="height: 250px; overflow: hidden;">
+                        <img src="{{ post.dinoImage.url }}" class="card-img-top" alt="{{ post.dinoNome }}" style="width: 100%; height: 100%; object-fit: cover;">  <!-- A imagem preencherá o container -->
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.dinoNome }}</h5>  <!-- Nome do dinossauro -->
+                        <p class="card-text">{{ post.dinoTipo }}</p>  <!-- Tipo do dinossauro -->
+                        <p class="card-text">{{ post.dinoDescricao|truncatechars:130 }}</p>  <!-- Descrição do dinossauro limitada a 130 caracteres -->
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+{% endblock content %}

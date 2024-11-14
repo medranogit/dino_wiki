@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% load static %}  
+{% block title %}Lista de Dinos{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/post-list.css' %}">  <!-- Certifique-se de que o caminho está correto -->
+{% endblock extra_css %}
+
+{% block content %}
+    <div class="teste">
+        <a href="{% url 'post-create' %}">
+            <button> 
+                Adicionar dino
+            </button>
+        </a>
+    </div>
+    <section class="dinos-list">
+        {% for post in posts %}
+        <div class="dino">
+            <div class="container">
+                <div class="image">
+                    <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+                    <div class="diet">
+                        {% if post.dinoDieta|stringformat:'s' == "Carnivoro" %}
+                            <img class="element" src="{% static 'assets/CarnivoreIco.png' %}" alt="Carnivore">
+                        {% elif post.dinoDieta|stringformat:'s' == "Herbivoro" %}
+                            <img class="element" src="{% static 'assets/HerbivoreIco.png' %}" alt="Herbivoro">
+                        {% elif post.dinoDieta|stringformat:'s' == "Ornivoro" %}
+                            <img class="element" src="{% static 'assets/OrnivoreIco.png' %}" alt="Ornivoro">
+                        {% else %}
+                            <img class="element" src="{% static 'assets/DefaultIco.png' %}" alt="Unknown Diet">
+                        {% endif %}
+                    </div>
+                    <div class="id">
+                        {{post.id}}#
+                    </div>
+                </div>
+                <div class="stats">
+                    <a href="{% url 'post-detail' post.id %}">
+                        <div class="name">
+                            {{ post.dinoNome }} 
+                        </div>
+                    </a>
+                    <a href="">
+                        <div class="tipo">
+                            {{ post.dinoTipo }}
+                        </div>
+                    </a>
+                    <div class="desc">
+                        {{ post.dinoDescricao|truncatechars:130 }}
+                    </div>
+                </div>
+            </div>
+        </div>  
+        {% endfor %}        
+    </section>         
+{% endblock content %} 

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+<!-- Isso carrega a tag 'static' para que você possa usá-la no template -->
+{% load static %}  
+<!-- Titulo -->
+{% block title %}Lista de Dinos{% endblock %}
+
+<!-- CSS -->
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/post-list.css' %}">  <!-- Certifique-se de que o caminho está correto -->
+{% endblock extra_css %}
+
+{% block content %}
+        <body>
+            <div class="main-layout">
+                <div class="teste">
+                    <!-- Verifique se este elemento está sendo estilizado corretamente -->
+                </div>
+                <section class="pals-list">
+                    {% for post in posts %}
+                    <div class="pal">
+                        <a href="">
+                            <div class="container">
+                                <div class="image">
+                                    <img src="https://palworld.gg/images/palicon/T_ThunderBird_icon_normal.png" alt="">
+                                </div>
+                                <div class="name">
+                                    {{ post.dinoNome }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>  
+                    {% endfor %}        
+                </section>
+                 
+            </div>
+            
+        </body>
+
+</div>
+{% endblock content %}

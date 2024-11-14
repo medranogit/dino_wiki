@@ -1,0 +1,74 @@
+/* Detalhes do Dino */
+.dino-info {
+  background-color: var(--primary-bg-color);
+  border: 1px solid var(--secondary-bg-color);
+  padding: var(--padding-base);
+  color: var(--text-color);
+  margin: 2rem auto; /* Centraliza o conteúdo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra ao card */
+  display: flex; /* Usando flexbox */
+  flex-direction: row; /* Organiza os itens em linha */
+  width: 100%; /* Ocupa toda a largura do contêiner pai */
+}
+
+/* Colunas */
+.column {
+  flex: 1; /* Cada coluna ocupa o mesmo espaço */
+  padding: 1rem; /* Espaçamento interno */
+}
+
+/* Título do Dino */
+.dino-info h1 {
+  font-size: var(--font-size-large);
+  margin-bottom: 1rem;
+  text-align: center; /* Centraliza o título */
+}
+
+/* Imagem do Dino */
+.dino-info .image {
+  margin-bottom: 1rem; /* Espaço abaixo da imagem */
+}
+
+.dino-info .image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra na imagem */
+}
+
+/* Informações do Dino */
+.dino-info .info {
+  text-align: left; /* Alinha as informações à esquerda */
+}
+
+/* Estilo para cada informação */
+.dino-info .info p {
+  font-size: var(--font-size-base);
+  margin: 0.5rem 0; /* Espaçamento entre parágrafos */
+  line-height: 1.5; /* Aumenta o espaçamento entre linhas */
+}
+
+/* Botão de Voltar */
+.dino-info .back-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--terciary-bg-color);
+  border-radius: 8px;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 100ms;
+  font-size: var(--font-size-base); /* Tamanho do texto do botão */
+}
+
+.dino-info .back-button:hover {
+  background-color: var(--secondary-bg-color);
+}
+
+/* Garantir que o main-layout preencha a altura total */
+.main-layout {
+  display: flex; /* Usando flexbox */
+  flex-direction: column; /* Organiza os itens em coluna */
+  height: 100vh; /* Altura total da viewport */
+}
