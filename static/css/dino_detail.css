@@ -14,7 +14,7 @@
 /* Colunas */
 .column {
   flex: 1; /* Cada coluna ocupa o mesmo espaço */
-  padding: 1rem; /* Espaçamento interno */
+  padding: var(--padding-base); /* Espaçamento interno */
 }
 
 /* Título do Dino */
@@ -22,6 +22,7 @@
   font-size: var(--font-size-large);
   margin-bottom: 1rem;
   text-align: center; /* Centraliza o título */
+  color: var(--text-color);
 }
 
 /* Imagem do Dino */
@@ -35,7 +36,6 @@
   border-radius: var(--border-radius);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Sombra na imagem */
   border: 5px solid var(--secondary-bg-color);
-  border-radius: 10px;
 }
 
 /* Informações do Dino */
@@ -49,8 +49,9 @@
   margin: 0.5rem 0; /* Espaçamento entre parágrafos */
   line-height: 1.5; /* Aumenta o espaçamento entre linhas */
   background-color: var(--terciary-bg-color);
-  padding: 10px;
-  border-radius: 5px;
+  padding: var(--padding-base);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
 }
 
 /* Botão de Voltar */
@@ -58,17 +59,18 @@
   display: inline-block;
   margin-top: 1rem;
   background-color: var(--terciary-bg-color);
-  border-radius: 8px;
-  color: #FFFFFF;
-  padding: 10px 16px;
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  padding: var(--padding-base);
   text-align: center;
   text-decoration: none;
-  transition: background-color 100ms;
+  transition: background-color 0.2s, transform 0.2s;
   font-size: var(--font-size-base); /* Tamanho do texto do botão */
 }
 
 .dino-info .back-button:hover {
   background-color: var(--secondary-bg-color);
+  transform: translateY(-2px);
 }
 
 /* Garantir que o layout de detalhes do dino preencha a altura total */
