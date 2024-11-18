@@ -4,8 +4,8 @@ from .views import get_options, create_dino
 
 urlpatterns = [
     path('', views.post_list, name='index'),
-    path('post-create/', views.post_create, name='post-create'),
-    path('post/<int:id>/', views.post_detail, name='post-detail'),
+    path('post-create/', views.dino_add, name='dino_add'),
+    path('post/<int:id>/', views.dino_detail, name='dino_detail'),
     path('api/get-options/', get_options, name='get_options'),
     path('create/', create_dino, name='create_dino'),
 ]

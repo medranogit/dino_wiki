@@ -19,7 +19,7 @@
 
     <div class="submenu">
         <h2>Ações</h2>
-        <a href="{% url 'post-create' %}" class="btn btn-primary">Criar Dinossauro</a>
+        <a href="{% url 'dino_add' %}" class="btn btn-primary">Criar Dinossauro</a>
         <a href="{% url 'index' %}" class="btn btn-secondary">Ver Lista de Dinossauros</a>
         <a href="#" class="btn btn-info">Outra Ação</a>
     </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="stats">
-                    <a href="{% url 'post-detail' post.id %}">
+                    <a href="{% url 'dino_detail' post.id %}">
                         <div class="name">
                             {{ post.dinoNome }} 
                         </div>

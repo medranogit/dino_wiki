@@ -21,7 +21,7 @@ def post_list(request):
     }
     return render(request, template_name, context)  # Renderiza o template 'index.html' com o contexto fornecido.
 
-def post_create(request):
+def dino_add(request):
     if request.method == 'POST':
         form = PostsForm(request.POST, request.FILES)
         print("Dados recebidos:", request.POST)
@@ -36,15 +36,15 @@ def post_create(request):
 
     # Buscando biomas do banco de dados
     biomas = DinoBioma.objects.all()
-    return render(request, 'post-form.html', {"form": form, "biomas": biomas})
+    return render(request, 'dino_add.html', {"form": form, "biomas": biomas})
 
-def post_detail(request, id):
-    template_name = 'post-detail.html'  # Define o nome do template que será usado para renderizar a página de detalhes.
-    post = Post.objects.get(id=id)  # Usa o método get para buscar o post com o ID fornecido. Se não for encontrado, levantará uma exceção.
-    context = {  # Cria um dicionário de contexto para passar dados para o template.
-        'post': post  # Inclui o objeto post no contexto, que será usado no template.
+def dino_detail(request, id):
+    template_name = 'dino_detail.html'  # Match the actual file name
+    post = Post.objects.get(id=id)
+    context = {
+        'post': post
     }
-    return render(request, template_name, context)  # Renderiza o template com o contexto fornecido e retorna a resposta HTTP.
+    return render(request, template_name, context)
 
 def get_options(request):
     tipos = list(DinoTipoDeDino.objects.values('id', 'nome'))
@@ -70,4 +70,4 @@ def create_dino(request):
     else:
         form = DinoForm()
     
-    return render(request, 'post_app/post-form.html', {'form': form})
+    return render(request, 'post_app/dino_add.html', {'form': form})
