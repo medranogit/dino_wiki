@@ -64,6 +64,9 @@
             <a href="{% url 'index' %}" class="back-button">
                 <i class="fas fa-arrow-left"></i> Voltar à lista
             </a>
+            <a href="{% url 'dino_edit' post.id %}" class="edit-button">
+                <i class="fas fa-edit"></i> Editar Dinossauro
+            </a>
         </div>
     </div>
 {% endblock content %}

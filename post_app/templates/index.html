@@ -34,6 +34,8 @@
                             <img class="element" src="{% static 'assets/CarnivoreIco.png' %}" alt="Carnivore">
                         {% elif post.dinoDieta|stringformat:'s' == "Herbivoro" %}
                             <img class="element" src="{% static 'assets/HerbivoreIco.png' %}" alt="Herbivoro">
+                        {% elif post.dinoDieta|stringformat:'s' == "Ornivoro" %}
+                            <img class="element" src="{% static 'assets/OrnivoreIco.png' %}" alt="Ornivoro">   
                         {% else %}
                             <img class="element" src="{% static 'assets/DefaultIco.png' %}" alt="Unknown Diet">
                         {% endif %}

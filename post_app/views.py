@@ -88,3 +88,48 @@ def create_dino(request):
         form = DinoForm()
     
     return render(request, 'post_app/dino_add.html', {'form': form})
+
+def dino_edit(request, id):
+    print("\n=== Iniciando dino_edit ===")
+    post = get_object_or_404(Post, id=id)
+    print(f"Post encontrado: {post.dinoNome}")
+    
+    if request.method == 'POST':
+        print("\nMétodo POST detectado")
+        print(f"POST data: {request.POST}")
+        print(f"FILES data: {request.FILES}")
+        
+        form = PostsForm(request.POST, request.FILES, instance=post)
+        print(f"Form é válido? {form.is_valid()}")
+        
+        if form.is_valid():
+            print("\nForm válido, salvando...")
+            if not request.FILES.get('dinoImage'):
+                print("Mantendo imagem atual")
+                form.instance.dinoImage = post.dinoImage
+            form.save()
+            print("Salvamento concluído")
+            messages.success(request, 'Dinossauro atualizado com sucesso!')
+            return redirect('dino_detail', id=id)
+        else:
+            print(f"\nErros no formulário: {form.errors}")
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
+    else:
+        print("\nMétodo GET detectado")
+        form = PostsForm(instance=post)
+    
+    context = {
+        'post': post,
+        'form': form,
+        'tipos': DinoTipoDeDino.objects.all(),
+        'epocas': DinoEpoca.objects.all(),
+        'dietas': DinoDieta.objects.all(),
+        'biomas': DinoBioma.objects.all(),
+    }
+    print("\nContext preparado para renderização")
+    print(f"Tipos disponíveis: {context['tipos'].count()}")
+    print(f"Épocas disponíveis: {context['epocas'].count()}")
+    print(f"Dietas disponíveis: {context['dietas'].count()}")
+    print(f"Biomas disponíveis: {context['biomas'].count()}")
+    
+    return render(request, 'dino_edit.html', context)

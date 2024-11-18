@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar {{ post.dinoNome }}{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dino_add.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="post_form_create">
+    <h1 class="form-title">Editar {{ post.dinoNome }}</h1>
+    
+    <form method="POST" enctype="multipart/form-data" id="dinoForm">
+        {% csrf_token %}
+        
+        <div class="form-sections">
+            <!-- Seção 1: Informações Básicas -->
+            <section class="form-section active">
+                <h3>Informações Básicas</h3>
+                <div class="form-group">
+                    <label for="dinoNome">Nome do Dinossauro</label>
+                    <input type="text" class="form-control" id="dinoNome" name="dinoNome" value="{{ post.dinoNome }}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoTipo">Tipo</label>
+                    <select class="form-control custom-select" id="dinoTipo" name="dinoTipo" required>
+                        {% for tipo in tipos %}
+                            <option value="{{ tipo.id }}" {% if tipo.id == post.dinoTipo.id %}selected{% endif %}>
+                                {{ tipo.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoDescricao">Descrição</label>
+                    <textarea class="form-control" id="dinoDescricao" name="dinoDescricao" rows="8" 
+                    style="min-height: 200px; resize: vertical;"
+                    required> {{ post.dinoDescricao }}        
+                    </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="dinoEpoca">Época</label>
+                    <select class="form-control custom-select" id="dinoEpoca" name="dinoEpoca" required>
+                        {% for epoca in epocas %}
+                            <option value="{{ epoca.id }}" {% if epoca.id == post.dinoEpoca.id %}selected{% endif %}>
+                                {{ epoca.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoDieta">Dieta</label>
+                    <select class="form-control custom-select" id="dinoDieta" name="dinoDieta" required>
+                        {% for dieta in dietas %}
+                            <option value="{{ dieta.id }}" {% if dieta.id == post.dinoDieta.id %}selected{% endif %}>
+                                {{ dieta.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="dinoTamanhoMin">Tamanho Mínimo (m)</label>
+                        <input type="number" step="0.1" class="form-control" id="dinoTamanhoMin" name="dinoTamanhoMin" value="{{ post.dinoTamanhoMin }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dinoTamanhoMax">Tamanho Máximo (m)</label>
+                        <input type="number" step="0.1" class="form-control" id="dinoTamanhoMax" name="dinoTamanhoMax" value="{{ post.dinoTamanhoMax }}" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="dinoPesoMin">Peso Mínimo (kg)</label>
+                        <input type="number" class="form-control" id="dinoPesoMin" name="dinoPesoMin" value="{{ post.dinoPesoMin }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dinoPesoMax">Peso Máximo (kg)</label>
+                        <input type="number" class="form-control" id="dinoPesoMax" name="dinoPesoMax" value="{{ post.dinoPesoMax }}" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="biomas">Biomas</label>
+                    <select multiple class="form-control custom-select" id="biomas" name="biomas" required>
+                        {% for bioma in biomas %}
+                            <option value="{{ bioma.id }}" {% if bioma in post.biomas.all %}selected{% endif %}>
+                                {{ bioma.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <small>Pressione "Control", ou "Command" no Mac, para selecionar mais de um.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="dinoImage">Imagem do Dinossauro</label>
+                    <div class="current-image mb-2">
+                        <img src="{{ post.dinoImage.url }}" alt="Imagem atual" style="max-width: 200px;">
+                    </div>
+                    <div class="custom-file-upload">
+                        <input type="file" class="form-control-file" id="dinoImage" name="dinoImage" accept="image/*">
+                        <div id="imagePreview"></div>
+                        <small>Deixe em branco para manter a imagem atual.</small>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="form-navigation">
+            <button type="submit" class="btn btn-success">Salvar Alterações</button>
+            <a href="{% url 'dino_detail' post.id %}" class="btn btn-danger">Cancelar</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Preview da imagem
+    const imageInput = document.getElementById('dinoImage');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-width: 200px;">`;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+{% endblock %}
