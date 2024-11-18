@@ -162,18 +162,24 @@
 
   @media (max-width: 768px) {
     .navbar {
-        margin: 1rem 0;
-        padding: 1rem !important;
+        margin: 1rem;
+        padding: 0.8rem 1rem !important;
     }
 
     .navbar-collapse {
+        background-color: var(--primary-bg-color);
+        border-radius: 8px;
         margin-top: 1rem;
-        background-color: var(--terciary-bg-color);
-        padding: 1rem;
-        border-radius: 5px;
+        padding: 0.5rem;
+    }
+
+    .navbar-toggler {
+        padding: 0.4rem 0.8rem;
+        margin-right: 0;
     }
 
     .nav-link {
-        margin: 0.5rem 0;
+        padding: 0.8rem 1rem !important;
+        margin: 0.2rem 0;
     }
   }

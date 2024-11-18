@@ -18,7 +18,12 @@
                     </div>
                 </div>
                 <div class="image">
-                    <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+                    <img 
+                        src="{{ post.dinoImage.url }}" 
+                        alt="{{ post.dinoNome }}"
+                        loading="lazy"
+                        srcset="{{ post.dinoImage.url }} 1x, {{ post.dinoImage.url }} 2x"
+                    >
                 </div>
             </div>
             <div class="column column2">

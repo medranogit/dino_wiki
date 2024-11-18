@@ -85,8 +85,9 @@ body {
 
 /* Container principal */
 .dino-detail-container {
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
 }
 
 /* Card principal */
@@ -94,8 +95,8 @@ body {
     background-color: var(--primary-bg-color);
     border: 1px solid var(--secondary-bg-color);
     padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
@@ -282,7 +283,7 @@ body {
 
 @media (max-width: 480px) {
     .dino-detail-container {
-        padding: 0.5rem;
+        padding: 1rem;
     }
 
     .dino-info {
