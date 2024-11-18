@@ -5,23 +5,22 @@
 {% block title %}Lista de Dinos{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">  <!-- Certifique-se de que o caminho está correto -->
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
 {% endblock extra_css %}
 
 {% block content %}
-    {% comment %} <div class="teste">
-        <a href="{% url 'post-create' %}">
-            <button> 
-                Adicionar dino
-            </button>
-        </a>
-    </div> {% endcomment %}
-
+<div class="main-content">
     <div class="submenu">
-        <h2>Ações</h2>
-        <a href="{% url 'dino_add' %}" class="btn btn-primary">Criar Dinossauro</a>
-        <a href="{% url 'index' %}" class="btn btn-secondary">Ver Lista de Dinossauros</a>
-        <a href="#" class="btn btn-info">Outra Ação</a>
+        <h2>Painel de Controle</h2>
+        <a href="{% url 'dino_add' %}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Criar Dinossauro
+        </a>
+        <a href="{% url 'index' %}" class="btn btn-secondary">
+            <i class="fas fa-list"></i> Lista de Dinossauros
+        </a>
+        <a href="#" class="btn btn-info">
+            <i class="fas fa-cog"></i> Configurações
+        </a>
     </div>
 
     <section class="dinos-list">
@@ -35,33 +34,22 @@
                             <img class="element" src="{% static 'assets/CarnivoreIco.png' %}" alt="Carnivore">
                         {% elif post.dinoDieta|stringformat:'s' == "Herbivoro" %}
                             <img class="element" src="{% static 'assets/HerbivoreIco.png' %}" alt="Herbivoro">
-                        {% elif post.dinoDieta|stringformat:'s' == "Ornivoro" %}
-                            <img class="element" src="{% static 'assets/OrnivoreIco.png' %}" alt="Ornivoro">
                         {% else %}
                             <img class="element" src="{% static 'assets/DefaultIco.png' %}" alt="Unknown Diet">
                         {% endif %}
                     </div>
-                    <div class="id">
-                        {{post.id}}#
-                    </div>
+                    <div class="id">#{{ post.id }}</div>
                 </div>
                 <div class="stats">
                     <a href="{% url 'dino_detail' post.id %}">
-                        <div class="name">
-                            {{ post.dinoNome }} 
-                        </div>
+                        <h3 class="name">{{ post.dinoNome }}</h3>
                     </a>
-                    <a href="">
-                        <div class="tipo">
-                            {{ post.dinoTipo }}
-                        </div>
-                    </a>
-                    <div class="desc">
-                        {{ post.dinoDescricao|truncatechars:130 }}
-                    </div>
+                    <div class="tipo">{{ post.dinoTipo }}</div>
+                    <p class="desc">{{ post.dinoDescricao|truncatechars:130 }}</p>
                 </div>
             </div>
         </div>  
         {% endfor %}        
-    </section>         
+    </section>
+</div>
 {% endblock content %} 

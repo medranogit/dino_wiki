@@ -63,9 +63,9 @@
     color: white;
     background-color: #0f2231;
     margin: auto auto 5rem;
-    max-width: 1500px;
+    max-width: 1400px;
     min-height: 90vh;
-    padding: 0 1rem;
+    padding: 0;
     width: 100%;
   }
 
@@ -103,92 +103,77 @@
 
   .navbar {
     background-color: var(--primary-bg-color);
-    padding: 1rem !important;
+    padding: 1rem 2rem !important;
+    border-radius: 10px;
+    margin: 2rem 2rem 1rem 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  @media (max-width: 768px) {
-    .navbar {
-        margin-top: 1rem !important;
-    }
-
-  }
-  
-  .navbar .nav-link {
-    color: #fff;
-    transition: color 0.3s;
-  }
-
-  .navbar .nav-link:hover {
-    color: var(--secondary-bg-color);
-  }
-
-  .navbar .navbar-brand {
+  .navbar-brand {
+    color: var(--text-color) !important;
     font-size: 1.5rem;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
-  .navbar .dropdown-menu {
-    background-color: var(--terciary-bg-color);
+  .navbar-brand:hover {
+    color: var(--secondary-bg-color) !important;
   }
 
-  .navbar .dropdown-item {
-    color: #fff;
-  }
-
-  .navbar .dropdown-item:hover {
-    background-color: var(--secondary-bg-color);
+  .navbar-brand i {
+    font-size: 1.8rem;
   }
 
   .navbar-toggler {
     border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 58px;
-    height: 50px;
-  }
-
-  .line {
-    display: block;
-    width: 100%;
-    height: 5px;
-    background-color: white;
-    border-radius: 1px;
-    margin: 3px 0;
+    background-color: var(--secondary-bg-color);
+    padding: 0.5rem;
   }
 
   .navbar-toggler-icon {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    position: relative;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   }
 
-  .navbar-toggler-icon:before,
-  .navbar-toggler-icon:after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: white;
-    position: absolute;
+  .navbar-nav {
+    margin-left: auto;
   }
 
-  .navbar-toggler-icon:before {
-    top: 8px;
+  .nav-link {
+    color: var(--text-color) !important;
+    padding: 0.5rem 1rem !important;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
   }
 
-  .navbar-toggler-icon:after {
-    bottom: 8px;
+  .nav-link:hover {
+    background-color: var(--secondary-bg-color);
+    transform: translateY(-2px);
   }
 
-  .navbar-toggler-icon .middle {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: white;
-    position: absolute;
-    top: 16px;
+  .nav-link i {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+        margin: 1rem 0;
+        padding: 1rem !important;
+    }
+
+    .navbar-collapse {
+        margin-top: 1rem;
+        background-color: var(--terciary-bg-color);
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+    .nav-link {
+        margin: 0.5rem 0;
+    }
   }
