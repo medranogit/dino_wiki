@@ -18,10 +18,20 @@ def post_list(request):
     template_name = 'index.html'
     post_list = Post.objects.all()
     
+    # Aplicar filtros
+    tipo_id = request.GET.get('tipo')
+    dieta_id = request.GET.get('dieta')
+    epoca_id = request.GET.get('epoca')
+    
+    if tipo_id:
+        post_list = post_list.filter(dinoTipo_id=tipo_id)
+    if dieta_id:
+        post_list = post_list.filter(dinoDieta_id=dieta_id)
+    if epoca_id:
+        post_list = post_list.filter(dinoEpoca_id=epoca_id)
+    
     # Criar um objeto Paginator com 8 itens por página
     paginator = Paginator(post_list, 8)
-    
-    # Pegar o número da página da query string
     page = request.GET.get('page', 1)
     
     try:
@@ -31,7 +41,10 @@ def post_list(request):
     
     context = {
         'posts': posts,
-        'page_range': paginator.page_range
+        'page_range': paginator.page_range,
+        'tipos': DinoTipoDeDino.objects.all(),
+        'dietas': DinoDieta.objects.all(),
+        'epocas': DinoEpoca.objects.all(),
     }
     return render(request, template_name, context)
 
@@ -133,3 +146,6 @@ def dino_edit(request, id):
     print(f"Biomas disponíveis: {context['biomas'].count()}")
     
     return render(request, 'dino_edit.html', context)
+
+def about_view(request):
+    return render(request, 'about.html')

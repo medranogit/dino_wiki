@@ -11,16 +11,59 @@
 {% block content %}
 <div class="main-content">
     <div class="submenu">
-        <h2>Painel de Controle</h2>
-        <a href="{% url 'dino_add' %}" class="btn btn-primary">
-            <i class="fas fa-plus"></i> Criar Dinossauro
-        </a>
-        <a href="{% url 'index' %}" class="btn btn-secondary">
-            <i class="fas fa-list"></i> Lista de Dinossauros
-        </a>
-        <a href="#" class="btn btn-info">
-            <i class="fas fa-cog"></i> Configurações
-        </a>
+
+        <!-- Sistema de Filtros -->
+        <div class="filter-section">
+            <h3>Filtros</h3>
+            <form method="GET" class="filter-form">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="tipo">Tipo:</label>
+                        <select name="tipo" id="tipo" class="form-control">
+                            <option value="">Todos os tipos</option>
+                            {% for tipo in tipos %}
+                                <option value="{{ tipo.id }}" {% if request.GET.tipo|stringformat:'s' == tipo.id|stringformat:'s' %}selected{% endif %}>
+                                    {{ tipo.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="dieta">Dieta:</label>
+                        <select name="dieta" id="dieta" class="form-control">
+                            <option value="">Todas as dietas</option>
+                            {% for dieta in dietas %}
+                                <option value="{{ dieta.id }}" {% if request.GET.dieta|stringformat:'s' == dieta.id|stringformat:'s' %}selected{% endif %}>
+                                    {{ dieta.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="epoca">Época:</label>
+                        <select name="epoca" id="epoca" class="form-control">
+                            <option value="">Todas as épocas</option>
+                            {% for epoca in epocas %}
+                                <option value="{{ epoca.id }}" {% if request.GET.epoca|stringformat:'s' == epoca.id|stringformat:'s' %}selected{% endif %}>
+                                    {{ epoca.nome }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-buttons">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-filter"></i> Filtrar
+                    </button>
+                    <a href="{% url 'index' %}" class="btn btn-secondary">
+                        <i class="fas fa-sync"></i> Limpar Filtros
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 
     <section class="dinos-list">
@@ -53,7 +96,9 @@
                     <a href="{% url 'dino_detail' post.id %}">
                         <h3 class="name">{{ post.dinoNome }}</h3>
                     </a>
-                    <div class="tipo">{{ post.dinoTipo }}</div>
+                    <div class="tipo">
+                        <span class="tipo-tag">{{ post.dinoTipo }}</span>
+                    </div>
                     <p class="desc">{{ post.dinoDescricao|truncatechars:130 }}</p>
                 </div>
             </div>

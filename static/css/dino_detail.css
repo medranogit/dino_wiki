@@ -141,7 +141,7 @@ body {
 }
 
 .dino-diet-badge.onivoro {
-    background-color: #ff9800;
+    background-color: #00aeff;
     color: white;
 }
 
@@ -319,34 +319,28 @@ body {
 
 .navigation {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 1rem;
     margin-top: 2rem;
 }
 
-.edit-button {
-    background-color: var(--secondary-bg-color);
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+.navigation .btn {
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
     text-decoration: none;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    transition: all 0.3s ease;
 }
 
-.edit-button:hover {
-    background-color: var(--accent-color);
+.navigation .btn:hover {
     transform: translateY(-2px);
-    color: var(--text-color);
-    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
+.navigation .btn i {
+    font-size: 1rem;
 }
 
 .dino-info .image .no-image {

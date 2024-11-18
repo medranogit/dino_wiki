@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/get-options/', get_options, name='get_options'),
     path('create/', create_dino, name='create_dino'),
     path('dino/<int:id>/edit/', views.dino_edit, name='dino_edit'),
+    path('about/', views.about_view, name='about'),
 ]
