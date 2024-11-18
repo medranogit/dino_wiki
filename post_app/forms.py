@@ -62,7 +62,7 @@ class PostsForm(forms.ModelForm):  # Cria um formulário baseado no modelo Posts
             'dinoTamanhoMax': 'Tamanho Máximo (m)',
             'dinoPesoMin': 'Peso Mínimo',
             'dinoPesoMax': 'Peso Máximo',
-            'dinoImage': 'Imagem do Dinossauro'
+            'dinoImage': 'Imagem do Dinossauro (opcional)'
         }
 
     def __init__(self, *args, **kwargs):  # Método de inicialização do formulário, usado para personalizar a instância do formulário.

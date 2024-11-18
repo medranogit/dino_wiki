@@ -77,6 +77,26 @@
     transform: scale(1.05);
 }
 
+.dino .image .no-image {
+    width: 100%;
+    height: 250px;
+    background-color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+}
+
+.dino .image .no-image i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.dino .image .no-image span {
+    font-size: 1rem;
+}
+
 /* Badges */
 .dino .diet {
     position: absolute;

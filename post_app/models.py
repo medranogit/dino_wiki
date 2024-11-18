@@ -65,7 +65,7 @@ class Post(models.Model):
     dinoPesoMin = models.IntegerField(validators=[MinValueValidator(0)])
     dinoPesoMax = models.IntegerField(validators=[MinValueValidator(0)])
     biomas = models.ManyToManyField(DinoBioma)
-    dinoImage = models.ImageField(upload_to='images/')
+    dinoImage = models.ImageField(upload_to='images/', blank=True, null=True)
     dinoCreateDate = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
