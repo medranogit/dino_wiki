@@ -93,6 +93,7 @@
   .messages .success {
     background-color: #d4edda;
     color: #155724;
+    padding: 1rem;
   }
 
   .messages .error {

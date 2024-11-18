@@ -8,24 +8,57 @@
 {% endblock %}
 
 {% block content %}
-    <div class="dino-info">
-        <div class="column column1">
-            <h1>{{ post.dinoNome }}</h1>
-            <div class="image">
-                <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+    <div class="dino-detail-container">
+        <div class="dino-info">
+            <div class="column column1">
+                <div class="dino-header">
+                    <h1>{{ post.dinoNome }}</h1>
+                    <div class="dino-diet-badge {% if post.dinoDieta|stringformat:'s' == 'Carnivoro' %}carnivoro{% elif post.dinoDieta|stringformat:'s' == 'Herbivoro' %}herbivoro{% else %}onivoro{% endif %}">
+                        {{ post.dinoDieta }}
+                    </div>
+                </div>
+                <div class="image">
+                    <img src="{{ post.dinoImage.url }}" alt="{{ post.dinoNome }}">
+                </div>
+            </div>
+            <div class="column column2">
+                <div class="info">
+                    <div class="info-section">
+                        <h2>Características</h2>
+                        <p><strong>Tipo:</strong> {{ post.dinoTipo }}</p>
+                        <p><strong>Descrição:</strong> {{ post.dinoDescricao }}</p>
+                    </div>
+                    
+                    <div class="info-section">
+                        <h2>Medidas</h2>
+                        <div class="measurements">
+                            <div class="measurement-box">
+                                <span class="label">Tamanho</span>
+                                <span class="value">{{ post.dinoTamanhoMin }} - {{ post.dinoTamanhoMax }} m</span>
+                            </div>
+                            <div class="measurement-box">
+                                <span class="label">Peso</span>
+                                <span class="value">{{ post.dinoPesoMin }} - {{ post.dinoPesoMax }} kg</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h2>Habitat</h2>
+                        <div class="biomas-list">
+                            {% for bioma in post.biomas.all %}
+                                <span class="bioma-tag">{{ bioma.nome }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="column column2">
-            <div class="info">
-                <p><strong>Tipo:</strong> {{ post.dinoTipo }}</p>
-                <p><strong>Descrição:</strong> {{ post.dinoDescricao }}</p>
-                <p><strong>Dieta:</strong> {{ post.dinoDieta }}</p>
-                <p><strong>Tamanho:</strong> {{ post.dinoTamanhoMin }} - {{ post.dinoTamanhoMax }} m</p>
-                <p><strong>Peso:</strong> {{ post.dinoPesoMin }} - {{ post.dinoPesoMax }} kg</p>
-                <p><strong>Biomas:</strong> {% for bioma in post.biomas.all %}{{ bioma.nome }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-                <p><strong>Criado em:</strong> {{ post.dinoCreateDate }}</p>
-            </div>
+        <div class="navigation">
+            <a href="{% url 'index' %}" class="back-button">
+                <i class="fas fa-arrow-left"></i> Voltar à lista
+            </a>
         </div>
     </div>
-    <a href="{% url 'index' %}" class="back-button">Voltar à lista</a>
 {% endblock content %}

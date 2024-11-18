@@ -4,125 +4,310 @@
 
 {% block content %}
 <div class="post_form_create">
-    <h1>Criar Novo Dinossauro</h1>
-    <form method="POST" enctype="multipart/form-data">
+    <h1 class="form-title">Criar Novo Dinossauro</h1>
+    
+    <!-- Progress bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="formProgress"></div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" id="dinoForm">
         {% csrf_token %}
         
-        <div class="form-group">
-            <label for="dinoNome">Nome do Dinossauro</label>
-            <input type="text" class="form-control" id="dinoNome" name="dinoNome" required>
-        </div>
-        
-        <div class="form-group">
-            <label for="dinoTipo">Tipo</label>
-            <select class="form-control" id="dinoTipo" name="dinoTipo" required>
-                <option value="">Selecione um tipo</option>
-                {% for tipo in tipos %}
-                    <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="dinoDescricao">Descrição</label>
-            <textarea class="form-control" id="dinoDescricao" name="dinoDescricao" required></textarea>
-        </div>
-        
-        <div class="form-group">
-            <label for="dinoEpoca">Época</label>
-            <select class="form-control" id="dinoEpoca" name="dinoEpoca" required>
-                <option value="">Selecione uma época</option>
-                {% for epoca in epocas %}
-                    <option value="{{ epoca.id }}">{{ epoca.nome }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label for="dinoDieta">Dieta</label>
-            <select class="form-control" id="dinoDieta" name="dinoDieta" required>
-                <option value="">Selecione uma dieta</option>
-                {% for dieta in dietas %}
-                    <option value="{{ dieta.id }}">{{ dieta.nome }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="dinoTamanhoMin">Tamanho Mínimo (m)</label>
-                <input type="number" class="form-control" id="dinoTamanhoMin" name="dinoTamanhoMin" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="dinoTamanhoMax">Tamanho Máximo (m)</label>
-                <input type="number" class="form-control" id="dinoTamanhoMax" name="dinoTamanhoMax" required>
-            </div>
+        <!-- Form sections -->
+        <div class="form-sections">
+            <!-- Seção 1: Informações Básicas -->
+            <section class="form-section active" data-section="1">
+                <h3>Informações Básicas</h3>
+                <div class="form-group">
+                    <label for="dinoNome">Nome do Dinossauro</label>
+                    <input type="text" class="form-control" id="dinoNome" name="dinoNome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoTipo">Tipo</label>
+                    <select class="form-control custom-select" id="dinoTipo" name="dinoTipo" required>
+                        <option value="">Selecione um tipo</option>
+                        {% for tipo in tipos %}
+                            <option value="{{ tipo.id }}">{{ tipo.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoDescricao">Descrição</label>
+                    <textarea class="form-control" id="dinoDescricao" name="dinoDescricao" required></textarea>
+                </div>
+            </section>
+
+            <!-- Seção 2: Características -->
+            <section class="form-section" data-section="2">
+                <h3>Características</h3>
+                <div class="form-group">
+                    <label for="dinoEpoca">Época</label>
+                    <select class="form-control custom-select" id="dinoEpoca" name="dinoEpoca" required>
+                        <option value="">Selecione uma época</option>
+                        {% for epoca in epocas %}
+                            <option value="{{ epoca.id }}">{{ epoca.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoDieta">Dieta</label>
+                    <select class="form-control custom-select" id="dinoDieta" name="dinoDieta" required>
+                        <option value="">Selecione uma dieta</option>
+                        {% for dieta in dietas %}
+                            <option value="{{ dieta.id }}">{{ dieta.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </section>
+
+            <!-- Seção 3: Medidas -->
+            <section class="form-section" data-section="3">
+                <h3>Medidas</h3>
+                <div class="measurements-container">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dinoTamanhoMin">Tamanho Mínimo (m)</label>
+                            <input type="number" class="form-control" id="dinoTamanhoMin" name="dinoTamanhoMin" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dinoTamanhoMax">Tamanho Máximo (m)</label>
+                            <input type="number" class="form-control" id="dinoTamanhoMax" name="dinoTamanhoMax" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unidadePeso">Unidade de Peso</label>
+                        <select class="form-control custom-select" id="unidadePeso" name="unidade_peso" required>
+                            <option value="">Selecione uma unidade</option>
+                            <option value="kg">Kilogramas</option>
+                            <option value="ton">Toneladas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dinoPesoMin">Peso Mínimo</label>
+                            <input type="number" class="form-control" id="dinoPesoMin" name="dinoPesoMin" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dinoPesoMax">Peso Máximo</label>
+                            <input type="number" class="form-control" id="dinoPesoMax" name="dinoPesoMax" required>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção 4: Habitat e Imagem -->
+            <section class="form-section" data-section="4">
+                <h3>Habitat e Imagem</h3>
+                <div class="form-group">
+                    <label for="biomas">Biomas</label>
+                    <select multiple class="form-control custom-select" id="biomas" name="biomas" required>
+                        {% for bioma in biomas %}
+                            <option value="{{ bioma.id }}">{{ bioma.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <small>Pressione "Control", ou "Command" no Mac, para selecionar mais de um.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dinoImage">Imagem do Dinossauro</label>
+                    <div class="custom-file-upload">
+                        <input type="file" class="form-control-file" id="dinoImage" name="dinoImage" accept="image/*">
+                        <div id="imagePreview"></div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div class="form-group">
-            <label for="unidadePeso">Unidade de Peso</label>
-            <select class="form-control" id="unidadePeso" name="unidade_peso" required>
-                <option value="">Selecione uma unidade</option>
-                <option value="kg">Kilogramas</option>
-                <option value="ton">Toneladas</option>
-            </select>
+        <!-- Navigation buttons -->
+        <div class="form-navigation">
+            <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Anterior</button>
+            <button type="button" class="btn btn-primary" id="nextBtn">Próximo</button>
+            <button type="submit" class="btn btn-success" id="submitBtn" style="display: none;">Criar Dinossauro</button>
+            <a href="{% url 'index' %}" class="btn btn-danger">Cancelar</a>
         </div>
-        
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="dinoPesoMin">Peso Mínimo</label>
-                <input type="number" class="form-control" id="dinoPesoMin" name="dinoPesoMin" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="dinoPesoMax">Peso Máximo</label>
-                <input type="number" class="form-control" id="dinoPesoMax" name="dinoPesoMax" required>
-            </div>
-        </div>
-        
-        <div class="form-group">
-            <label for="biomas">Biomas</label>
-            <select multiple class="form-control" id="biomas" name="biomas" required>
-                {% for bioma in biomas %}
-                    <option value="{{ bioma.id }}">{{ bioma.nome }}</option>
-                {% endfor %}
-            </select>
-            <small>Pressione “Control”, ou “Command” no Mac, para selecionar mais de um.</small>
-        </div>
-        
-        <div class="form-group">
-            <label for="dinoImage">Imagem do Dinossauro</label>
-            <input type="file" class="form-control-file" id="dinoImage" name="dinoImage" accept="image/*">
-        </div>
-        
-        
-        
-        <button type="submit" class="btn btn-primary">Criar Dinossauro</button>
-        <a href="{% url 'index' %}" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 
+<style>
+.post_form_create {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--primary-bg-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.form-title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: var(--terciary-bg-color);
+    margin-bottom: 2rem;
+    border-radius: 2px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #4CAF50;
+    width: 25%;
+    transition: width 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+.form-section {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.form-section.active {
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control, .custom-select {
+    background-color: var(--highlight-bg-color);
+    border: 1px solid var(--terciary-bg-color);
+    color: var(--text-color);
+    padding: 0.8rem;
+}
+
+.form-control:focus, .custom-select:focus {
+    background-color: var(--highlight-bg-color);
+    border-color: var(--secondary-bg-color);
+    color: var(--text-color);
+    box-shadow: 0 0 0 0.2rem rgba(46, 82, 112, 0.25);
+}
+
+.custom-file-upload {
+    border: 2px dashed var(--terciary-bg-color);
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+#imagePreview {
+    margin-top: 1rem;
+    max-width: 300px;
+    margin: 1rem auto;
+}
+
+#imagePreview img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-control.custom-select {
+    min-height: 38px;
+    height: auto !important;
+    padding: 8px 12px;
+    line-height: 1.5;
+    overflow: visible;
+}
+
+.form-control.custom-select option {
+    padding: 8px 12px;
+    line-height: 1.5;
+    min-height: 30px;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+select[multiple].form-control.custom-select {
+    min-height: 120px;
+}
+</style>
+
 <script>
-    // Função para preencher as listas
-    function preencherSelect(selectId, options) {
-        const select = document.getElementById(selectId);
-        options.forEach(option => {
-            const newOption = document.createElement("option");
-            newOption.value = option.id; // Supondo que você tenha um campo 'id'
-            newOption.textContent = option.nome; // Supondo que você tenha um campo 'nome'
-            select.appendChild(newOption);
+document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.form-section');
+    const progressBar = document.getElementById('formProgress');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    let currentSection = 0;
+
+    // Função para atualizar a visualização das seções
+    function updateSections() {
+        sections.forEach((section, index) => {
+            section.classList.remove('active');
+            if (index === currentSection) {
+                section.classList.add('active');
+            }
         });
+
+        // Atualizar progress bar
+        progressBar.style.width = `${((currentSection + 1) / sections.length) * 100}%`;
+
+        // Atualizar botões
+        prevBtn.style.display = currentSection === 0 ? 'none' : 'block';
+        if (currentSection === sections.length - 1) {
+            nextBtn.style.display = 'none';
+            submitBtn.style.display = 'block';
+        } else {
+            nextBtn.style.display = 'block';
+            submitBtn.style.display = 'none';
+        }
     }
 
-    // Carregar opções do servidor
-    window.onload = function() {
-        fetch('/api/get-options/')
-            .then(response => response.json())
-            .then(data => {
-                preencherSelect("dinoTipo", data.tipos);
-                preencherSelect("dinoEpoca", data.epocas);
-                preencherSelect("dinoDieta", data.dietas);
-            })
-            .catch(error => console.error('Erro ao carregar opções:', error));
-    };
+    // Event listeners para os botões
+    nextBtn.addEventListener('click', () => {
+        if (currentSection < sections.length - 1) {
+            currentSection++;
+            updateSections();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentSection > 0) {
+            currentSection--;
+            updateSections();
+        }
+    });
+
+    // Preview da imagem
+    const imageInput = document.getElementById('dinoImage');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Inicializar a primeira seção
+    updateSections();
+});
 </script>
 {% endblock %}

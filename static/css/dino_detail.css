@@ -82,3 +82,140 @@
 body {
   background-color: #0f2231;
 }
+
+/* Container principal */
+.dino-detail-container {
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Card principal */
+.dino-info {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--secondary-bg-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 2rem;
+}
+
+/* Colunas */
+.column {
+    flex: 1;
+}
+
+/* Cabeçalho do dinossauro */
+.dino-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.dino-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* Badge de dieta */
+.dino-diet-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.dino-diet-badge.carnivoro {
+    background-color: #ff4444;
+    color: white;
+}
+
+.dino-diet-badge.herbivoro {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dino-diet-badge.onivoro {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Imagem */
+.image {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 3px solid var(--secondary-bg-color);
+    transition: transform 0.3s ease;
+}
+
+.image img:hover {
+    transform: scale(1.02);
+}
+
+/* Seções de informação */
+.info-section {
+    background-color: var(--terciary-bg-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.info-section h2 {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--secondary-bg-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Medidas */
+.measurements {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.measurement-box {
+    background-color: var(--primary-bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.measurement-box .label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.measurement-box .value {
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+/* Biomas */
+.biomas-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.bioma-tag {
+    background-color: var(--primary-bg-color);
+    padding: 0.2rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}

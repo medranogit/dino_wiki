@@ -24,19 +24,22 @@ def post_list(request):
 def dino_add(request):
     if request.method == 'POST':
         form = PostsForm(request.POST, request.FILES)
-        print("Dados recebidos:", request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'O post foi criado com sucesso')
-            return HttpResponseRedirect(reverse('index'))  # Redireciona para a lista de dinossauros
+            messages.success(request, 'Dinossauro criado com sucesso!')
+            return redirect('index')
         else:
-            print("Erros no formulário:", form.errors)
+            messages.error(request, 'Por favor, corrija os erros abaixo.')
     else:
         form = PostsForm()
-
-    # Buscando biomas do banco de dados
-    biomas = DinoBioma.objects.all()
-    return render(request, 'dino_add.html', {"form": form, "biomas": biomas})
+    
+    return render(request, 'dino_add.html', {
+        'form': form,
+        'tipos': DinoTipoDeDino.objects.all(),
+        'epocas': DinoEpoca.objects.all(),
+        'dietas': DinoDieta.objects.all(),
+        'biomas': DinoBioma.objects.all(),
+    })
 
 def dino_detail(request, id):
     template_name = 'dino_detail.html'  # Match the actual file name
