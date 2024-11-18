@@ -7,6 +7,7 @@ from .forms import PostsForm
 from .models import DinoTipoDeDino, DinoEpoca, DinoDieta, DinoBioma
 from django.http import JsonResponse
 from .forms import DinoForm  # Supondo que você tenha um formulário Django
+from django.core.paginator import Paginator
 
 # As Views no Django são uma parte fundamental do framework e são responsáveis por processar as solicitações HTTP e retornar uma resposta ao cliente. 
 # Em termos simples, uma view recebe uma solicitação (request), interage com o modelo (se necessário), e retorna uma resposta, que geralmente é uma página HTML, um arquivo JSON, ou até mesmo uma mensagem de erro.
@@ -14,12 +15,25 @@ from .forms import DinoForm  # Supondo que você tenha um formulário Django
 # Create your views here.
 
 def post_list(request):
-    template_name = 'index.html'  # Altere para 'index.html'
-    posts = Post.objects.all()  # Obtém todas as instâncias do modelo 'Posts'.
+    template_name = 'index.html'
+    post_list = Post.objects.all()
+    
+    # Criar um objeto Paginator com 8 itens por página
+    paginator = Paginator(post_list, 8)
+    
+    # Pegar o número da página da query string
+    page = request.GET.get('page', 1)
+    
+    try:
+        posts = paginator.page(page)
+    except:
+        posts = paginator.page(1)
+    
     context = {
-        'posts': posts  # Passa a lista de postagens como uma variável 'posts' para o template.
+        'posts': posts,
+        'page_range': paginator.page_range
     }
-    return render(request, template_name, context)  # Renderiza o template 'index.html' com o contexto fornecido.
+    return render(request, template_name, context)
 
 def dino_add(request):
     if request.method == 'POST':

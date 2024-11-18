@@ -227,3 +227,26 @@
         margin: 0.5rem 0;
     }
 }
+
+.pagination-nav {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pagination .page-link {
+    color: var(--text-color);
+    background-color: var(--primary-bg-color);
+    border-color: var(--secondary-bg-color);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-bg-color);
+    color: var(--text-color);
+}
+
+.pagination .page-link:hover {
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-bg-color);
+    color: var(--text-color);
+}
