@@ -54,9 +54,3 @@ Siga os passos abaixo para configurar o projeto em sua máquina local:
 
 6. **Acesse a aplicação em seu navegador**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
-## Contato
-
-Para mais informações, entre em contato com [seu_email@exemplo.com](mailto:seu_email@exemplo.com).
-
-## Screenshots
-
