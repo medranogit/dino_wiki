@@ -80,11 +80,11 @@
                         </div>
                     {% endif %}
                     <div class="diet">
-                        {% if post.dinoDieta|stringformat:'s' == "Carnivoro" %}
+                        {% if post.dinoDieta|stringformat:'s' == "Carnívoro" %}
                             <img class="element" src="{% static 'assets/CarnivoreIco.png' %}" alt="Carnivore">
-                        {% elif post.dinoDieta|stringformat:'s' == "Herbivoro" %}
+                        {% elif post.dinoDieta|stringformat:'s' == "Herbívoro" %}
                             <img class="element" src="{% static 'assets/HerbivoreIco.png' %}" alt="Herbivoro">
-                        {% elif post.dinoDieta|stringformat:'s' == "Ornivoro" %}
+                        {% elif post.dinoDieta|stringformat:'s' == "Onívoro" %}
                             <img class="element" src="{% static 'assets/OrnivoreIco.png' %}" alt="Ornivoro">   
                         {% else %}
                             <img class="element" src="{% static 'assets/DefaultIco.png' %}" alt="Unknown Diet">
@@ -100,6 +100,7 @@
                         <span class="tipo-tag">{{ post.dinoTipo }}</span>
                     </div>
                     <p class="desc">{{ post.dinoDescricao|truncatechars:130 }}</p>
+                    <!-- <p class="desc">{{ post.dinoDieta }}</p> -->
                 </div>
             </div>
         </div>  
