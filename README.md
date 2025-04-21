@@ -1,6 +1,11 @@
 # DinoList
+![image](https://github.com/user-attachments/assets/1169976b-3fe6-407e-b1f3-e9efc306dd6f)
+
+> ⚠️ **Atenção:** Este projeto ainda **não foi finalizado**. Algumas funcionalidades podem estar incompletas ou em desenvolvimento.
+
 
 DinoList é uma aplicação web desenvolvida em Django que permite aos usuários visualizar, criar e gerenciar informações sobre dinossauros. A aplicação possui uma interface de administração para gerenciar os dados dos dinossauros, incluindo suas características, dietas e biomas.
+
 
 ## Funcionalidades
 
@@ -17,16 +22,14 @@ DinoList é uma aplicação web desenvolvida em Django que permite aos usuários
 - **Bootstrap**: Para um design responsivo e moderno.
 - **SQLite**: Banco de dados padrão do Django para desenvolvimento.
 
-## Estrutura do Projeto
-
 ## Instalação
 
 Siga os passos abaixo para configurar o projeto em sua máquina local:
 
 1. **Clone o repositório**:
    ```bash
-   git clone https://github.com/seu_usuario/dinolists.git
-   cd dinolists
+   git clone https://github.com/[SEU_USUARIO]/dino_wiki.git
+   cd dino_wiki
    ```
 
 2. **Crie um ambiente virtual e ative-o**:
@@ -47,10 +50,23 @@ Siga os passos abaixo para configurar o projeto em sua máquina local:
    python manage.py migrate
    ```
 
-5. **Inicie o servidor de desenvolvimento**:
+5. **Alimente o banco de dados**:
+   ```bash
+   python manage.py populate_db
+   ```
+6. **Crie o SuperAdmin para acessar o painel**:
+   ```bash
+   python manage.py createsuperuser
+   Username: admin
+   Email address: seu_email@example.com
+   Password: sua_senha
+   Password (again): sua_senha_novamente
+   Superuser created successfully.
+   ```
+7. **Inicie o servidor de desenvolvimento**:
    ```bash
    python manage.py runserver
    ```
 
-6. **Acesse a aplicação em seu navegador**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+8. **Acesse a aplicação em seu navegador**: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
